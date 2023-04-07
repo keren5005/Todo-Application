@@ -5,7 +5,7 @@ Built with nodeJS this is a modern "Todo Application".
 
 Fork the repository with github
 ```sh
-git clone https://ssss.sss.sss
+git clone https://github.com/MadBull1995/keren-todo-app.git
 ```
 
 ## Development
