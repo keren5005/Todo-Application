@@ -10,7 +10,10 @@ let route = Router();
 
 // Our "DataBase" for todos
 let todosData = new TodosList([
-    new Todo(1,'Test todo','this is some test',new Date('2023-04-20'))
+    // Seed data
+    new Todo(1,'Test todo','this is some test',new Date('2023-04-20')),
+    new Todo(2,'Test Full','I love ful',new Date('2023-04-20')),
+    new Todo(3,'Bigo <3 Full','We all love ful',new Date('2023-04-20'))
 ]);
 
 // Returns the total number of TODOs in the system, according to the given filter.
