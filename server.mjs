@@ -13,7 +13,7 @@ import http from 'http';
 import app from './app/index.mjs';
 
 // Constant port value
-const port = 8080;
+const port = 8496;
 
 // Set port for express applocation
 app.set('port', port);

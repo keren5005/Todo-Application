@@ -4,7 +4,7 @@
  */
 
 import { Router } from 'express'
-import { Todo, TodosList } from '../api/todo.mjs';
+import { Todo, TodosList, Statuses } from '../api/todo.mjs';
 
 let route = Router();
 
@@ -27,13 +27,13 @@ route.get('/size', (req,res,next) => {
 })
 
 // Returns the content of the todos according to the supplied status
-route.get('/content/:id', (req,res,next) => {
-    const {id} = req.params; 
-
+route.get('/content', (req,res,next) => {
+    let {status} = req.query;
+    status = status === undefined ? 'ALL' : status;
     res
         .status(200)
         .json({
-            result: todosData.search(id),
+            result: [...todosData.todos].filter(todo => status === 'ALL' ? true : todo.status === status),
             errorMessage: undefined
         })
 })
