@@ -4,30 +4,34 @@
  */
 
 import { Router } from 'express'
-import { Todo } from '../api/todo.mjs';
+import { Todo, TodosList } from '../api/todo.mjs';
 
 let route = Router();
 
 // Our "DataBase" for todos
-let todosData = [];
+let todosData = new TodosList([
+    new Todo(1,'Test todo','this is some test',new Date('2023-04-20'))
+]);
 
 // Returns the total number of TODOs in the system, according to the given filter.
 route.get('/size', (req,res,next) => {
-    console.log(req)
     res
-        .status(500)
+        .status(200)
         .json({
-            error: 'Endpoint is not implemented'
+            result: todosData.todos.size,
+            errorMessage: undefined
         })
 })
 
 // Returns the content of the todos according to the supplied status
-route.get('/content', (req,res,next) => {
-    console.log(req)
+route.get('/content/:id', (req,res,next) => {
+    const {id} = req.params; 
+
     res
-        .status(500)
+        .status(200)
         .json({
-            error: 'Endpoint is not implemented'
+            result: todosData.search(id),
+            errorMessage: undefined
         })
 })
 
