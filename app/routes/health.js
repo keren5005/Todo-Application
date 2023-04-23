@@ -3,15 +3,17 @@
  * This module is for sanity checks
  */
 
-import { Router } from 'express'
+const { Router } = require('express');
 
 let route = Router();
 
 // This is a sanity endpoint used to check that the server is up and running.
-route.get('/health', (req,res,next) => {
-    res
+route.get('/health', (req,response,next) => {
+    response
         .status(200)
         .send('OK')
 })
 
-export default route;
+module.exports = {
+    route
+};

@@ -8,9 +8,9 @@
  */
 
 // Default HTTP import
-import http from 'http';
+const http = require('http');
 // Our todo application
-import app from './app/index.mjs';
+const app = require('./app/index.js').app;
 
 // Constant port value
 const port = 8496;

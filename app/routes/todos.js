@@ -3,8 +3,8 @@
  * This is our core API's for our todo list data
  */
 
-import { Router } from 'express'
-import { Todo, TodosList, Statuses } from '../api/todo.mjs';
+const  Router = require('express');
+const { Todo, TodosList, Statuses } = require('../api/todo.js');
 
 let route = Router();
 
@@ -41,9 +41,9 @@ route.get('/content', (req,res,next) => {
 // Creates a new TODO item in the system. 
 route.post('/', (req,res,next) => {
     const { title, content, dueDate } = req.body;
-
+    console.log(req.body)
     if(
-        todosData
+        todosData._data
             .map(todo => todo.title)
             .includes(title)
     ) {
@@ -54,7 +54,8 @@ route.post('/', (req,res,next) => {
                 result: undefined,
                 errorMessage: `Error: TODO with the title [${title}] already exists in the system`
             })
-    } else if(new Date(dueDate).getTime <= new Date().getTime()) {
+    } 
+    else if(new Date(dueDate).getTime() <= new Date().getTime()) {
         // Fail due date is in the past
         res
             .status(409)
@@ -62,15 +63,17 @@ route.post('/', (req,res,next) => {
                 result: undefined,
                 errorMessage: `Error: Can\’t create new TODO that its due date is in the past`
             })
-    } else {
+    }  else {
+        
         // Success
         let newTodo = new Todo(
-            todosData.length+1,
+            todosData._data.length+1,
             title,
             content,
             new Date(dueDate)
         );
-        todosData.push(newTodo)
+        todosData.addTodo(newTodo)
+        // console.log(newTodo)
         res
             .status(200)
             .json({
@@ -100,4 +103,6 @@ route.delete('/', (req,res,next) => {
         })
 })
 
-export default route;
+module.exports = {
+    route
+};

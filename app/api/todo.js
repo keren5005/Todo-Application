@@ -1,10 +1,10 @@
-export const Statuses = {
+const Statuses = {
 	PENDING: Symbol("PENDING"),
 	LATE: Symbol("LATE"),
 	DONE: Symbol("DONE"),
 }
 
-export class Todo {
+class Todo {
 
     constructor(id,title,content,dueDate) {
         this.id = id;
@@ -19,9 +19,10 @@ export class Todo {
     }
 }
 
-export class TodosList {
+class TodosList {
 
     constructor(todos) {
+        this._data = todos;
         this.todos = new Set(todos ? [...todos] : []);
     }
 
@@ -45,4 +46,10 @@ export class TodosList {
         return this.todos.size()
     }
 
+}
+
+module.exports = {
+    Todo,
+    Statuses,
+    TodosList
 }

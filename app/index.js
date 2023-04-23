@@ -5,11 +5,11 @@
  */
 
 // Import our route implemantations
-import { health, todos } from './routes/index.mjs';
+const { health, todos } = require('./routes/index.js');
 
 // Import express and default body parser to json
-import express from 'express';
-import bodyParser from 'body-parser';
+const express = require('express');
+const bodyParser = require('body-parser');
 
 // Init an express application
 const app = express();
@@ -27,8 +27,10 @@ app.use(bodyParser.json({ limit: '50mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
 // Attach our routes to application
-app.use(baseApi, health);
-app.use(baseApi, todos);
+app.use(baseApi, health.route);
+app.use(baseApi, todos.route);
 
 // Export our application
-export default app;
+module.exports = {
+    app
+}
