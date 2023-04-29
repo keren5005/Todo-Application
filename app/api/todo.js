@@ -23,6 +23,14 @@ class TodosList {
 
     constructor(todos) {
         this._data = todos;
+        this._deleted = [];
+        this._data.forEach(todo => {
+            if(todo.dueDate.getTime() < new Date().getTime()) {
+                todo.status = Statuses.LATE;
+            } else if(todo.dueDate.getTime() > new Date().getTime()) {
+                todo.status = Statuses.PENDING;
+            }
+        });
         this.todos = new Set(todos ? [...todos] : []);
     }
 
@@ -35,11 +43,15 @@ class TodosList {
     }
 
     addTodo(todo) {
-        this.todos.add(todo)
+        this._data.push(todo)
     }
 
     delete(todo) {
-        this.todos.delete(todo)
+        let i = this._data.indexOf(todo);
+        this._deleted.push(todo)
+        if (i > -1) { 
+            this._data.splice(i, 1); 
+        }
     }
 
     size() {

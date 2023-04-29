@@ -17,10 +17,8 @@ const port = 8496;
 
 // Set port for express applocation
 app.set('port', port);
-
 // Create normal HTTP server based on express application
 const server = http.createServer(app);
-
 // Callback function for error on server load
 const onError = error => {
     if (error.syscall !== "listen") {
