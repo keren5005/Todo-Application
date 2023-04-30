@@ -11,13 +11,6 @@ let route = Router();
 // Our "DataBase" for todos
 let todosData = new TodosList([
     // Seed data
-    // new Todo(4,'Test Pending','this is some test',new Date('2023-05-20')),
-    // new Todo(1,'Test todo','this is some test',new Date('2023-04-24')),
-    // new Todo(2,'Test Full','I love ful',new Date('2023-04-20')),
-    // new Todo(3,'Bigo <3 Full','We all love ful',new Date('2023-04-13')),
-    // new Todo(5,'a','this is some test',new Date('2023-05-20')),
-    // new Todo(6,'b','this is some test',new Date('2023-05-20')),
-
 ]);
 
 // Returns the total number of TODOs in the system, according to the given filter.
@@ -48,7 +41,6 @@ route.get('/size', (req,res,next) => {
 // Returns the content of the todos according to the supplied status
 route.get('/content', (req,response,next) => {
     let { status , sortBy } = req.query;
-    status = status === undefined ? 'ALL' : status;
     if(!['LATE','DONE','ALL','PENDING'].includes(status)) {
         response.status(400).json()
     } else if(!['ID','DUE_DATE','TITLE',undefined].includes(sortBy)) {
