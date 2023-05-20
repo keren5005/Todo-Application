@@ -5,8 +5,8 @@
  */
 
 // Import our route implemantations
-const { health, todos } = require('./routes/index.js');
-const { requestLogger } = require("./utils/logger");
+const { health, todos, logs } = require('./routes/index.js');
+const { requestLogger, todoLogger } = require("./utils/logger");
 
 // Import express and default body parser to json
 const express = require('express');
@@ -29,6 +29,8 @@ app.use(bodyParser.json({ limit: '50mb', extended: true }))
 // Limit max url encoded data to 50mb
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
+app.locals.requestLogger = requestLogger;
+app.locals.todoLogger = todoLogger;
 // Define global logger reequest function
 const logRequests = function (req,res,next) {
     
@@ -37,11 +39,14 @@ const logRequests = function (req,res,next) {
     const startTime = new Date();
     
     const requestNumber = requestsNumber;
-
+    req.requestNumber = requestNumber
     // Before call completion
-    requestLogger.info(`Incoming request | #${requestNumber} | resource: #TODO | HTTP Verb ${req.method}`, {
+    const resource = req.path;
+
+    app.locals.requestLogger.info(`Incoming request | #${requestNumber} | resource: ${resource} | HTTP Verb ${req.method}`, {
         requestNumber
     })
+    req.todoLogger = app.locals.todoLogger; // Set global variable in the request object
 
     // Handle all other middlewares / methods
     next()
@@ -49,18 +54,18 @@ const logRequests = function (req,res,next) {
     // After call completion
     const endTime = new Date();
     const duration = endTime - startTime;
-    requestLogger.debug(`request #${requestNumber} duration: ${duration}ms`, {
+    app.locals.requestLogger.debug(`request #${requestNumber} duration: ${duration}ms`, {
         requestNumber
     })
 }
 
 // Attach a global middleware function for all server requests
 app.use(logRequests)
+app.use('/logs', logs.route);
 
 // Attach our routes to application
-app.use(baseApi, health.route);
 app.use(baseApi, todos.route);
-
+app.use(baseApi, health.route);
 // Export our application
 module.exports = {
     app

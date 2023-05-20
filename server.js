@@ -40,7 +40,7 @@ const onError = error => {
 const onListening = () => {
     const addr = server.address();
     const bind = typeof addr === "string" ? "pipe " + addr : "port " + port;
-    console.log(`Listening to [${addr.address}] ${bind}`)
+    // console.log(`Listening to [${addr.address}] ${bind}`)
 };
 
 // Define on events callback functions

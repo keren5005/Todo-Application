@@ -5,13 +5,17 @@ const myFormat = printf(({ level, message, requestNumber, timestamp }) => {
   return `${timestamp} ${level}: ${message} | request #${requestNumber}`;
 });
 
+const timestampFormat = timestamp({
+    format: 'DD-MM-YYYY hh:mm:ss.sss'
+})
+
+const combinedFormat = combine(
+    timestampFormat,
+    myFormat
+)
+
 const requestLogger = createLogger({
-    format: combine(
-        timestamp({
-            format: 'DD-MM-YYYY hh:mm:ss.sss'
-        }),
-        myFormat
-    ),
+    format: combinedFormat,
     transports: [
         new transports.File({ filename: 'logs/requests.log' }),
         new transports.Console()
@@ -19,12 +23,7 @@ const requestLogger = createLogger({
 });
 
 const todoLogger = createLogger({
-    format: combine(
-        timestamp({
-            format: 'DD-MM-YYYY hh:mm:ss.sss'
-        }),
-        myFormat
-    ),
+    format: combinedFormat,
     transports: [
         new transports.File({ filename: 'logs/todos.log' }),
     ]
