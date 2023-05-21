@@ -1,3 +1,0 @@
-20-05-2023 10:19:58.5858 info: Incoming request | #1 | resource: /todo | HTTP Verb POST | request #1
-20-05-2023 10:20:06.066 info: Incoming request | #2 | resource: /todo | HTTP Verb PUT | request #2
-20-05-2023 10:20:20.2020 info: Incoming request | #3 | resource: /todo/size | HTTP Verb GET | request #3

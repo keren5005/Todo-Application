@@ -146,7 +146,7 @@ route.put('/', (req,res,next) => {
         let todo = [...todosData._data].find(todo => todo.id === Number(id));
         if(todo) {
             const oldStatus = todo.status;
-            req.todoLogger.debug(`Todo id [${id}] state change: ${oldStatus} --> ${status}`,{
+            req.todoLogger.debug(`Todo id [${id}] state change: ${oldStatus === Statuses.PENDING ? 'PENDING' : oldStatus === Statuses.DONE ? 'DONE' : oldStatus === Statuses.LATE ? 'LATE' : 'UNKNOWN'} --> ${status}`,{
                 requestNumber: req.requestNumber
             })
             todo.status = Statuses[status];
@@ -157,7 +157,7 @@ route.put('/', (req,res,next) => {
                 })
         } else {
             let errMsg = `Error: no such TODO with id ${id}`;
-            req.todoLogger.error(`Error: ${errMsg}`,{
+            req.todoLogger.error(`${errMsg}`,{
                 requestNumber: req.requestNumber
             })
             res.status(404).json({
@@ -176,7 +176,7 @@ route.delete('/', (req,res,next) => {
             requestNumber: req.requestNumber
         })
         todosData.delete(deletedTodo);
-        req.todoLogger.debug(`After removing todo id [{todo ID}] there are ${todosData._data.length} TODOs in the system`, {
+        req.todoLogger.debug(`After removing todo id [${id}] there are ${todosData._data.length} TODOs in the system`, {
             requestNumber: req.requestNumber
         })
         res.status(200).json({
