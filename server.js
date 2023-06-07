@@ -13,7 +13,7 @@ const http = require('http');
 const app = require('./app/index.js').app;
 
 // Constant port value
-const port = 9583;
+const port = 9285;
 
 // Set port for express applocation
 app.set('port', port);
