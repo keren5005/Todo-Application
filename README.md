@@ -15,9 +15,23 @@ Run the development server with `nodemon`
 npm run dev
 ```
 
+## Docker
+This app can be shipped via docker.
+
+The `Dockerfile` placed on root directory holds the image build configurations, to build the image run:
+```sh
+docker build -t keren-todo-app .
+```
+
+Then you can run the image:
+```sh
+docker run --name keren-todo-app -d -p 3769:9285 keren-todo-app
+```
+
 ## Deploy
 Run the server in production
 
 ```sh
-npm run prod
+npm start
 ```
+
