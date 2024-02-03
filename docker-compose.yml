@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  todo:
+    build: .
+    ports:
+      - "3769:9285"
+    depends_on:
+      - postgres
+      - mongo
+    networks:
+      - todo_net
+
+  postgres:
+    image: theshultz/kaplat-postgres-instance
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=todos
+    networks:
+      - todo_net
+
+  mongo:
+    image: theshultz/kaplat-mongo-instance
+    ports:
+      - "9001:9001"
+      - "9000:9000"
+    networks:
+      - todo_net
+  
+networks:
+  todo_net:
+    name: todo_net

@@ -15,7 +15,7 @@ let todosData = new TodosList([
 
 // Returns the total number of TODOs in the system, according to the given filter.
 route.get('/size', (req,res,next) => {
-    const { status }  = req.query;
+    const { status , persistanceMethod }  = req.query;
     let totalSizeTodos = 0;
     if(!['LATE','DONE','ALL','PENDING'].includes(status)) {
         res.status(400).json()
@@ -43,7 +43,7 @@ route.get('/size', (req,res,next) => {
 
 // Returns the content of the todos according to the supplied status
 route.get('/content', (req,response,next) => {
-    let { status , sortBy } = req.query;
+    let { status , sortBy, persistanceMethod  } = req.query;
     if(!['LATE','DONE','ALL','PENDING'].includes(status)) {
         response.status(400).json()
     } else if(!['ID','DUE_DATE','TITLE',undefined].includes(sortBy)) {
