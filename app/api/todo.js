@@ -97,7 +97,7 @@ class TodosList {
     }
 
     async _updateMongo(id, status) {
-        await TodoMongoModel.updateOne({ rawid: id }, { $set: { state: status } });
+        await TodoMongoModel.updateOne({ rawid: Number(id) }, { $set: { state: status } });
     }
 
     async updateTodo(id, status) {
@@ -116,11 +116,11 @@ class TodosList {
 
     async _addMongo(todo) {
         let mongo_todo = new TodoMongoModel({
-            rawid: todo.id,
+            rawid: Number(todo.id),
             title: todo.title,
             content: todo.content,
             duedate: todo.time(),
-            status: todo.state(),
+            state: todo.state(),
         });
 
         await mongo_todo.save();
@@ -159,7 +159,7 @@ class TodosList {
     async size(persistanceMethod, state) {
         let size = 0;
         if (persistanceMethod === "MONGO") {
-            let query = state === "ALL" ? {} : { status: state };
+            let query = state === "ALL" ? {} : { state: state };
             size = await TodoMongoModel.countDocuments(query);
         } else if (persistanceMethod === "POSTGRES") {
             if (state !== "ALL") {
@@ -182,7 +182,7 @@ const TodoMongoModel = mongoose.model(
         title: String,
         content: String,
         duedate: Date,
-        status: String
+        state: String
     }
 );
 
