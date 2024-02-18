@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 app.locals.requestLogger = requestLogger;
 app.locals.todoLogger = todoLogger;
 // Define global logger reequest function
-const logRequests = function (req,res,next) {
+const logRequests = async function (req,res,next) {
     
     requestsNumber += 1;
 
@@ -49,7 +49,7 @@ const logRequests = function (req,res,next) {
     req.todoLogger = app.locals.todoLogger; // Set global variable in the request object
 
     // Handle all other middlewares / methods
-    next()
+    await next()
 
     // After call completion
     const endTime = new Date();
