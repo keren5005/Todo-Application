@@ -21,12 +21,21 @@ services:
       - POSTGRES_DB=todos
     networks:
       - todo_net
-
+  
   mongo:
-    image: theshultz/kaplat-mongo-instance
+    image: mongo:latest
+    container_name: mongo
     ports:
-      - "9001:9001"
-      - "9000:9000"
+      - "27017:27017"
+    # volumes:
+    #   - mongo_data:/data/db
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: example
+    # image: theshultz/kaplat-mongo-instance
+    # command: ['--logpath', '/var/mongo.log']
+    # ports:
+    #   - "27017:27017"
     networks:
       - todo_net
   
