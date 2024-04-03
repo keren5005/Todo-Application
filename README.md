@@ -4,15 +4,15 @@ This Todo Application, built with Node.js, allows users to efficiently manage th
 
 ## Usage
 
- **Clone the Repository**: 
+# Clone the Repository: 
    
    ```sh
    git clone https://github.com/MadBull1995/keren-todo-app.git
 
-## Install Dependencies
+## Install Dependencies: 
 npm install
 
-**Run the Development Server:**
+## Run the Development Server:
 npm run dev
 
 ## Features:
