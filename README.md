@@ -1,29 +1,33 @@
-# Todo Application
+# Keren's Todo Application
 
-Built with Node.js, this is a modern Todo Application.
+This Todo Application, built with Node.js, allows users to efficiently manage their tasks with ease.
 
 ## Usage
 
-Run the development server with `nodemon`:
+ **Clone the Repository**: 
+   
+   ```sh
+   git clone https://github.com/MadBull1995/keren-todo-app.git
 
-```sh
+## Install Dependencies
+npm install
+
+**Run the Development Server:**
 npm run dev
 
-Docker
-You can also deploy this app via Docker. The Dockerfile placed in the root directory contains the necessary configurations. To build the Docker image:
+## Features:
+*Create, read, update, and delete tasks.
+*Organize tasks into different categories or lists.
+*Mark tasks as completed.
+*Search and filter tasks.
+*Responsive design for mobile and desktop usage.
 
-Copy code
-docker build -t keren-todo-app .
-Then, run the Docker container:
+## Installation:
+To run this application locally, ensure you have Node.js and npm installed on your machine. Then, follow the steps outlined in the Usage section to clone the repository, install dependencies, and start the development server.
 
-docker run --name keren-todo-app -d -p 3769:9285 keren-todo-app
 
-Deploy
-For production deployment, run the server:
 
-Copy code
-npm start
 
-About
-This Todo Application simplifies task management with its intuitive interface and efficient features.
+
+
 
