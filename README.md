@@ -3,12 +3,6 @@
 This Todo Application, built with Node.js, allows users to efficiently manage their tasks with ease.
 
 ## Usage
-
-# Clone the Repository: 
-   
-   ```sh
-   git clone https://github.com/MadBull1995/keren-todo-app.git
-
 ## Install Dependencies: 
 npm install
 
